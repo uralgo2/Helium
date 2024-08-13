@@ -12,7 +12,7 @@
 
 
 namespace he::engine {
-	BaseGame::BaseGame(WindowOptions  windowOptions) : _windowOptions(std::move(windowOptions)) {
+	BaseGame::BaseGame(WindowOptions  windowOptions) : _windowOptions(std::move(windowOptions)), _keyboardManager(_keyboardState) {
 		if(!glfwInit())
 			throw std::runtime_error("Couldn't initialize GLFW.");
 
@@ -38,10 +38,6 @@ namespace he::engine {
 		glfwMakeContextCurrent(_windowHandler);
 
 		glfwSwapInterval(_windowOptions.VSync == true ? 1 : 0);
-
-		glewExperimental = GL_TRUE;
-		if (glewInit() != GLEW_OK)
-			throw std::runtime_error("Couldn't initialize GLEW.");
 
 		glfwGetFramebufferSize(_windowHandler, &_windowSize.x, &_windowSize.y);
 

@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.28)
 project(helium)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
+add_subdirectory(render_engine)
 add_subdirectory(engine)
 add_subdirectory(math)
 
@@ -14,4 +15,4 @@ find_package(fmt CONFIG REQUIRED)
 
 
 add_executable(helium main.cpp)
-target_link_libraries(helium helium_engine glfw GLEW::GLEW OpenGL::GL glm::glm-header-only  fmt::fmt-header-only)
+target_link_libraries(helium helium_engine phoenix_render_engine glfw GLEW::GLEW OpenGL::GL glm::glm-header-only  fmt::fmt-header-only)

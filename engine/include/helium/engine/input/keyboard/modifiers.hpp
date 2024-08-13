@@ -16,7 +16,7 @@ namespace he::engine::input::keyboard {
 		NumLock  = 0x0020
 	};
 
-	inline bool HasFlag(KeyModifiers _this, KeyModifiers flag) {
+	constexpr bool HasFlag(KeyModifiers _this, KeyModifiers flag) {
 		return (static_cast<int>(_this) & static_cast<int>(flag)) != 0;
 	}
 }

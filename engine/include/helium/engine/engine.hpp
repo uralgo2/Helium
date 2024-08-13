@@ -4,13 +4,19 @@
 
 #ifndef ENGINE_HPP
 #define ENGINE_HPP
-#include "base_game.hpp"
+#include "helium/engine/base_game.hpp"
+#include "phoenix/phoenix_render_engine.hpp"
+
 class BaseGame;
 namespace he::engine {
 	class HeliumEngine {
+		private:
+		BaseGame* _game;
+		phoenix::IPhoenixRenderEngine* _renderEngine;
 	public:
+		HeliumEngine(BaseGame* game, phoenix::IPhoenixRenderEngine* renderEngine);
 		void Init();
-		void Run(BaseGame *game);
+		void Run();
 	};
 }
 #endif //ENGINE_HPP

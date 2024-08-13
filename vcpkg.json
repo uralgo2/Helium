@@ -1,8 +1,8 @@
 {
   "dependencies": [
+    "opengl",
     "glew",
     "glfw3",
-    "opengl",
     "glm",
     "fmt"
   ]

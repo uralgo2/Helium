@@ -20,7 +20,7 @@ struct KeyboardState {
 		inline void SetKeyState(Keys key, const KeyboardKeyState& state) {
 			_keyStates.insert_or_assign(key, state);
 		}
-		inline const KeyboardKeyState& GetKeyState(Keys key) {
+		const KeyboardKeyState& GetKeyState(const Keys key) {
 			if(_keyStates.find(key) == _keyStates.end())
 				_keyStates.insert({
 					key,

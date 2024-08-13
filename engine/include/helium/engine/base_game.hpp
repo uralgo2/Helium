@@ -4,13 +4,17 @@
 
 #ifndef BASE_GAME_HPP
 #define BASE_GAME_HPP
-#include "window_options.hpp"
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
-#include "engine.hpp"
-#include "events/keyboard_key_event_args.hpp"
-#include "input/keyboard/keyboard_state.hpp"
+
+#include "helium/engine/window_options.hpp"
+#include "helium/engine/engine.hpp"
+#include "helium/engine/events/keyboard_key_event_args.hpp"
+#include "helium/engine/input/keyboard/keyboard_state.hpp"
+#include "helium/engine/input/keyboard/keyboard_manager.hpp"
+#include "phoenix/scene.hpp"
 
 namespace he::engine {
 	class BaseGame {
@@ -19,7 +23,9 @@ namespace he::engine {
 		GLFWwindow* _windowHandler;
 		glm::ivec2 _windowSize;
 		input::keyboard::KeyboardState _keyboardState;
-
+	protected:
+		input::keyboard::KeyboardManager _keyboardManager;
+		phoenix::Scene* _scene;
 	public:
 		volatile bool IsRunning = false;
 		explicit BaseGame(WindowOptions  windowOptions);

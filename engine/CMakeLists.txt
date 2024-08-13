@@ -13,4 +13,4 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 
-target_link_libraries(helium_engine glfw GLEW::GLEW OpenGL::GL glm::glm-header-only fmt::fmt-header-only)
+target_link_libraries(helium_engine phoenix_render_engine glfw GLEW::GLEW OpenGL::GL glm::glm-header-only fmt::fmt-header-only)

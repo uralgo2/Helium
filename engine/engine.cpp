@@ -8,15 +8,21 @@
 
 
 namespace he::engine {
+	HeliumEngine::HeliumEngine(BaseGame* game, phoenix::IPhoenixRenderEngine* renderEngine) : _game(game), _renderEngine(renderEngine)
+		{
+
+		}
 	void HeliumEngine::Init() {
+		_renderEngine->Init();
+		_game->OnInit();
 	}
 
-	void HeliumEngine::Run(BaseGame *game) {
-		game->IsRunning = true;
+	void HeliumEngine::Run() {
+		_game->IsRunning = true;
 
 		auto lastTime = glfwGetTime();
 
-		while(game->IsRunning) {
+		while(_game->IsRunning) {
 			glfwPollEvents();
 
 			const auto now = glfwGetTime();
@@ -24,9 +30,9 @@ namespace he::engine {
 
 			lastTime = now;
 
-			game->OnRender(static_cast<float>(deltaTime));
+			_game->OnRender(static_cast<float>(deltaTime));
 
-			glfwSwapBuffers(game->_windowHandler);
+			glfwSwapBuffers(_game->_windowHandler);
 		}
 	}
 } // render_engine

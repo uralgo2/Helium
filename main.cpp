@@ -20,6 +20,8 @@ public:
         true
     }) {}
     void OnRender(float deltaTime) override {
+        using namespace he::engine::input::keyboard;
+
         glClear(GL_COLOR_BUFFER_BIT);
     }
 
@@ -27,14 +29,13 @@ public:
         glViewport(0, 0, size.x, size.y);
     }
     void OnKeyDown(const he::engine::events::KeyboardKeyEventArgs &eventArgs) override {
-        if(eventArgs.Key == he::engine::input::keyboard::Keys::A && !eventArgs.IsRepeat) {
-            fmt::print(fg(fmt::color::green), "Okay, that's works fine!\n");
-        }
-        if(eventArgs.Key == he::engine::input::keyboard::Keys::Escape) {
+        using namespace he::engine::input::keyboard;
+      
+        if(eventArgs.Key == Keys::Escape) {
             this->Close();
         }
-        if(eventArgs.Key == he::engine::input::keyboard::Keys::E) {
-            throw std::runtime_error("Exception!");
+        if(eventArgs.Key == Keys::Space && !eventArgs.IsRepeat){
+            glClearColor((float)rand() / (float)RAND_MAX, (float)rand() / (float)RAND_MAX, (float)rand() / (float)RAND_MAX, 1);    
         }
     }
     void OnClose() override {
@@ -52,11 +53,13 @@ int main() {
         SetConsoleMode(hOut, dwMode);
         #endif
 
-        he::engine::HeliumEngine engine;
         auto* game = new SampleGame(1600, 900, "SampleGame");
+        auto* renderEngine = new phoenix::OpenglRenderEngine();
 
+        he::engine::HeliumEngine engine{game, (phoenix::IPhoenixRenderEngine*)renderEngine};
+        
         engine.Init();
-        engine.Run(game);
+        engine.Run();
     }
     catch (std::exception& e) {
         fmt::print(fg(fmt::color::red), "Error occured: {}\n", e.what());
